@@ -9,8 +9,20 @@ data class User(
     val username: String,
     val password: String,
     val email: String,
-    val monthlyBudget: Double = 0.0,
-    val income: Double = 0.0,
-    val minMonthlyGoal: Double = 0.0,
-    val maxMonthlyGoal: Double = 0.0
+    var monthlyBudget: Double = 0.0,
+    var income: Double = 0.0,
+    var minMonthlyGoal: Double = 0.0,
+    var maxMonthlyGoal: Double = 0.0,
+    
+    // Avatar Selection
+    var avatarResourceName: String = "ic_person_placeholder",
+    
+    // Personal Details
+    var fullName: String = "",
+    var phoneNumber: String = "",
+    
+    // Bank Card Details
+    var bankCardNumber: String = "",
+    var bankCardExpiry: String = "",
+    var bankCardHolder: String = ""
 )

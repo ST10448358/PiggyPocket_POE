@@ -6,14 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [User::class, Category::class, Expense::class],
-    version = 5
+    entities = [User::class, Category::class, Expense::class, WishListItem::class],
+    version = 9
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun categoryDao(): CategoryDao
     abstract fun expenseDao(): ExpenseDao
+    abstract fun wishListDao(): WishListItemDao
 
     companion object {
         @Volatile

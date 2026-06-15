@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerBg"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
+        android:minHeight="180dp"
         android:background="@drawable/bg_dashboard_top"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -38,14 +39,26 @@
             app:layout_constraintStart_toEndOf="@+id/btnBack"
             app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
+        <ImageButton
+            android:id="@+id/btnFilter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:tint="@color/white" />
+
         <TextView
             android:id="@+id/tvTotalLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOTAL MONTHLY SPENDING"
+            android:text="TOTAL SPENDING"
             android:textColor="#CCFFFFFF"
             android:textSize="12sp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
@@ -54,13 +67,65 @@
             android:id="@+id/tvTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R 353.99"
+            android:text="R 0.00"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTotalLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalLabel"
+            app:layout_constraintBottom_toTopOf="@+id/clFilterSection"
+            app:layout_goneMarginBottom="24dp"/>
+
+        <!-- Date Filter Section (Hidden by default) -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clFilterSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalAmount"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tvStartDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
+                android:backgroundTint="#26FFFFFF"
+                android:padding="8dp"
+                android:text="Start Date"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/tvEndDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_edittext"
+                android:backgroundTint="#26FFFFFF"
+                android:padding="8dp"
+                android:text="End Date"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,7 +141,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Donut Chart Card -->
+            <!-- Bar Chart Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,27 +149,14 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/white" android:padding="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="○ Category Distribution" android:textStyle="bold" android:textColor="@color/black" android:textSize="12sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Category Spending" android:textStyle="bold" android:textColor="@color/black" android:textSize="12sp"/>
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pieChart"
+                    <com.github.mikephil.charting.charts.CombinedChart
+                        android:id="@+id/combinedChart"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_margin="16dp" />
+                        android:layout_height="300dp"
+                        android:layout_marginTop="16dp" />
 
-                    <GridLayout
-                        android:id="@+id/glLegend"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:rowCount="3"
-                        android:visibility="gone">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Utilities" android:textColor="#2196F3" android:textSize="10sp" android:layout_margin="4dp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Groceries" android:textColor="#4CAF50" android:textSize="10sp" android:layout_margin="4dp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Shopping" android:textColor="#E91E63" android:textSize="10sp" android:layout_margin="4dp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Transport" android:textColor="#FF9800" android:textSize="10sp" android:layout_margin="4dp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Entertainment" android:textColor="#9C27B0" android:textSize="10sp" android:layout_margin="4dp"/>
-                    </GridLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -114,8 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFF8E1">
+                app:cardElevation="2dp">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/white" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💡 Spending Insights" android:textColor="#FF8F00" android:textStyle="bold" android:textSize="12sp"/>
                     <TextView
@@ -123,7 +174,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Your highest spending category is Utilities, accounting for R 120.00 this month."
+                        android:text="No spending data available for this month."
                         android:textColor="@color/black"
                         android:textSize="13sp" />
                 </LinearLayout>

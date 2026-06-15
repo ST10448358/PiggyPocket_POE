@@ -37,6 +37,10 @@ class AchievementsActivity : AppCompatActivity() {
             finish()
         }
 
+        findViewById<View>(R.id.cvGameButton).setOnClickListener {
+            startActivity(Intent(this, SavingsGoalRunnerActivity::class.java))
+        }
+
         // Trigger achievement check
         checkAchievements()
     }

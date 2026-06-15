@@ -37,6 +37,9 @@
         <activity android:name=".ExpenseDetailsActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".GoalsActivity" />
+        <activity android:name=".WishListActivity" />
+        <activity android:name=".SavingsGoalRunnerActivity" />
+        <activity android:name=".ProfileActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
