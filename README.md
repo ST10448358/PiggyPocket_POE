@@ -28,9 +28,9 @@ It allows users to track income, monitor expenses, and maintain financial discip
 </p>
 
 
-Click here if icon is not working: Github link:https://github.com/ST10448358/PiggyPocket_Part2.git
+Click here if icon is not working: Github link:https://github.com/ST10448358/PiggyPocket_POE.git
 
-Click here if icon is not working: Youtube video link:https://youtu.be/9hrFypdLx2o 
+Click here if icon is not working: Youtube video link:https://youtu.be/VtnVBGcxhJQ
 
 
 
